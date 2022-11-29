@@ -1,0 +1,62 @@
+config:
+  credentials: []
+  project_repos:
+    codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval:
+      branch: main
+      repo: https://codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.7
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-magnolia-dugong.sh
+        container: qc.acc_cheeky-cerulean-toad
+  QC.Doc:
+    repos:
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-white-termite.sh
+        container: qc.doc_clammy-coral-cougar
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval git:
+        commands:
+        - /usr/bin/env sh .sqa/script.ugly-sapphire-mastiff.sh
+        container: qc.doc_lanky-coral-ocelot
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.slaphappy-coral-audemer.sh
+        container: qc.doc_pasty-peach-peccary
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.shabby-amber-toucan.sh
+        container: qc.doc_cheeky-azure-pig
+  QC.Lic:
+    repos:
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.freaky-turquoise-macaw.sh
+        container: qc.lic_chummy-cinnamon-chicken
+  QC.Sec:
+    repos:
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.whiny-grey-pinscher.sh
+        container: qc.sec_bluesy-brown-donkey
+  QC.Sty:
+    repos:
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-tomato-fousek.sh
+        container: qc.sty_wiggy-violet-zebra
+  QC.Ver:
+    repos:
+      codebase.helmholtz.cloud/hifis/overall/surveys/hifis-surveyval get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.homey-carmine-pig.sh
+        container: qc.ver_lumpy-cinnabar-rattlesnake
+timeout: 1800
